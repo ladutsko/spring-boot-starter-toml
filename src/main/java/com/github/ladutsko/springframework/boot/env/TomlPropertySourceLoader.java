@@ -30,6 +30,7 @@ import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -67,12 +68,14 @@ public class TomlPropertySourceLoader implements PropertySourceLoader {
     @Override
     public PropertySource<?> load(String name, Resource resource, String profile) throws IOException {
         if (null == profile) {
-            Map<String, Object> source = Toml.read(resource.getInputStream());
-            if (!source.isEmpty()) {
-                Map<String, Object> result = new LinkedHashMap<>();
-                buildFlattenedMap(result, source, null);
-                if (!result.isEmpty()) {
-                    return new MapPropertySource(name, result);
+            try (InputStream in = resource.getInputStream()) {
+                Map<String, Object> source = Toml.read(in);
+                if (!source.isEmpty()) {
+                    Map<String, Object> result = new LinkedHashMap<>();
+                    buildFlattenedMap(result, source, null);
+                    if (!result.isEmpty()) {
+                        return new MapPropertySource(name, result);
+                    }
                 }
             }
         }
