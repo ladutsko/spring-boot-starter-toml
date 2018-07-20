@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 description 'Strategy to load TOML v0.4.0 files'
 group = 'com.github.ladutsko'
-version = '1.0.1'
+version = '2.0.0'
 
 repositories {
     mavenLocal()
@@ -18,7 +18,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 ext.versions = [
-    springBoot: '1.5.14.RELEASE'
+    springBoot: '2.0.3.RELEASE'
 ]
 
 dependencies {
