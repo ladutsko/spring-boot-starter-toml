@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 description 'Strategy to load TOML v0.4.0 files'
 group = 'com.github.ladutsko'
-version = '1.0.0'
+version = '1.0.1'
 
 repositories {
     mavenLocal()
